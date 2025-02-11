@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Manager</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+        .button {
+            padding: 10px 20px;
+            font-size: 18px;
+            border: none;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+            width: 200px;
+        }
+        .button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Task Manager</h1>
+    <div class="container">
+        <a href="add_task/"><button class="button">Add New Task</button></a>
+        <a href="view_task/"><button class="button">View Tasks</button></a>
+        <a href="completed_task/"><button class="button">Completed Tasks</button></a>
+    </div>
+
+</body>
+</html>
