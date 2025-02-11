@@ -32,18 +32,30 @@
         <tr>
             <th>Task Name</th>
             <th>Description</th>
+            <th>Completed</th>
             
         </tr>
         {% for detail in details %}
         <tr>
             <td>{{ detail.task_name }}</td>
             <td>{{ detail.task_desc }}</td>
+            <td>
+                {% if detail.task_status == "True" %}
+                    Completed
+                {%else %}
+                Not Completed
+                {% endif %}
+            </td>
         {% empty %}
         <tr>
             <td colspan="2">No tasks found.</td>
         </tr>
         {% endfor %}
     </table>
+    <br>
+    <button type="submit"  >
+        Edit
+    </button>
 
 </body>
 </html>

@@ -14,6 +14,7 @@ def add_task(request):
     if request.method == 'POST':
         task_name = request.POST.get("task_name")
         task_desc = request.POST.get("task_desc")
+        task_status = request.POST.get("task_status", False)
         #deadline = request.POST.get("task_deadline")
         if Details.objects.filter(task_name=task_name).exists():
             return render(request, 'add_task.html', {'error': 'Task with this name already exists'})
@@ -24,7 +25,7 @@ def add_task(request):
                 except ValueError:
                     return render(request, 'add_task.html', {'error': 'Invalid date format'})
         """
-        Details.objects.create(task_name= task_name, task_desc = task_desc)
+        Details.objects.create(task_name= task_name, task_desc = task_desc, task_status = task_status)
         return redirect('view_task')
     details = Details.objects.all()
     return render(request,'add_task.html',{'details': details})
@@ -34,4 +35,8 @@ def view_task(request):
     return render(request, 'view_task.html', {'details': task})
 
 def completed_task(request):
-    return render(request, 'completed_task.html')
+    task = Details.objects.filter(task_status = True)
+    return render(request, 'completed_task.html', {'details': task})
+
+def edit_task(request):
+    return render(request, 'edit_task.html')

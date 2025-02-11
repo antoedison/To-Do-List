@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Completed Tasks</title>
+    <title>View Tasks</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -27,25 +27,37 @@
 </head>
 <body>
 
-    <h1>Completed Tasks</h1>
+    <h1>All Tasks</h1>
     <table>
         <tr>
             <th>Task Name</th>
             <th>Description</th>
-            <th>Status</th>
+            <th>Completed</th>
+            <th>ACtion</th>
+            
         </tr>
         {% for detail in details %}
         <tr>
             <td>{{ detail.task_name }}</td>
             <td>{{ detail.task_desc }}</td>
-            <td>Completed ✅</td>
-        </tr>
+            <td>
+                {% if detail.task_status == "True" %}
+                    Completed
+                {%else %}
+                Not Completed
+                {% endif %}
+            </td>
         {% empty %}
         <tr>
-            <td colspan="3">No completed tasks found.</td>
+            <td colspan="2">No tasks found.</td>
         </tr>
         {% endfor %}
     </table>
+    <br>
+     <button type="submit" style="float: left;">Delete</button>
+     <button type="submit" style="float: right;">Mark as Comple</button>
+     <button type="submit" >Delete</button>
+
 
 </body>
 </html>
