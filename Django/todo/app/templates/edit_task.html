@@ -28,35 +28,39 @@
 <body>
 
     <h1>All Tasks</h1>
-    <table>
-        <tr>
-            <th>Task Name</th>
-            <th>Description</th>
-            <th>Completed</th>
-            <th>ACtion</th>
-            
-        </tr>
-        {% for detail in details %}
-        <tr>
-            <td>{{ detail.task_name }}</td>
-            <td>{{ detail.task_desc }}</td>
-            <td>
-                {% if detail.task_status == "True" %}
-                    Completed
-                {%else %}
-                Not Completed
-                {% endif %}
-            </td>
-        {% empty %}
-        <tr>
-            <td colspan="2">No tasks found.</td>
-        </tr>
-        {% endfor %}
-    </table>
+    <form method="POST" action="{% url 'edit_task' %}" >
+        {% csrf_token %}
+        <table>
+            <tr>
+                <th>Task Name</th>
+                <th>Description</th>
+                <th>Completed</th>
+                <th>Action</th>
+                
+            </tr>
+            {% for detail in details %}
+            <tr>
+                <td>{{ detail.task_name }}</td>
+                <td>{{ detail.task_desc }}</td>
+                <td>
+                    {% if detail.task_status == "True" %}
+                        Completed
+                    {%else %}
+                    Not Completed
+                    {% endif %}
+                </td>
+                <td>
+                    <input type="checkbox" name ='task_ids' value="{{detail.id}}">
+                </td>
+            {% empty %}
+            <tr>
+                <td colspan="2">No tasks found.</td>
+            </tr>
+            {% endfor %}
+        </table>
     <br>
-     <button type="submit" style="float: left;">Delete</button>
-     <button type="submit" style="float: right;">Mark as Comple</button>
-     <button type="submit" >Delete</button>
+     <button type="submit" style="float: left;" name="action" value="delete">Delete</button>
+     <button type="submit" style="float: right;" name="action" value="completed">Mark as Complete</button>
 
 
 </body>

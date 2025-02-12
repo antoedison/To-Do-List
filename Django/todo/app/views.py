@@ -39,4 +39,25 @@ def completed_task(request):
     return render(request, 'completed_task.html', {'details': task})
 
 def edit_task(request):
-    return render(request, 'edit_task.html')
+    task = Details.objects.all()
+    if request.method == 'POST':
+        task_ids = request.POST.getlist("task_ids")
+        action = request.POST.get("action")
+
+        if not task_ids:  
+            return redirect('view_task')
+            
+        
+        tasks = Details.objects.filter(id__in=task_ids)
+        if action == 'delete':
+            tasks.delete()
+            return redirect('view_task')
+        
+        if action == 'completed':
+            tasks.update(task_status=True)
+            for x in tasks:
+                print(x.task_status)
+            return redirect('view_task')
+
+
+    return render(request, 'edit_task.html', {'details': task})

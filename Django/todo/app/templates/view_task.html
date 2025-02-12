@@ -40,7 +40,7 @@
             <td>{{ detail.task_name }}</td>
             <td>{{ detail.task_desc }}</td>
             <td>
-                {% if detail.task_status == "True" %}
+                {% if detail.task_status %}
                     Completed
                 {%else %}
                 Not Completed
@@ -48,12 +48,12 @@
             </td>
         {% empty %}
         <tr>
-            <td colspan="2">No tasks found.</td>
+            <td colspan="3">No tasks found.</td>
         </tr>
         {% endfor %}
     </table>
     <br>
-    <button type="submit"  >
+    <button onclick="location.href='{% url 'edit_task' %}'">
         Edit
     </button>
 
